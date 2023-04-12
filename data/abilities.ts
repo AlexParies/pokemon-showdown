@@ -237,6 +237,56 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		rating: 2,
 		num: 165,
 	},
+	radical:{
+	  onModifyTypePriority: -1,
+		onPreStart(pokemon) {
+			this.add('-ability', pokemon, 'Wonder Guard');
+			this.add('-ability', pokemon, 'No Guard');
+			this.add('-ability', pokemon, 'Pixilate');
+		},
+
+		onAnyAccuracy(accuracy, target, source, move) {
+					if (move && (source === this.effectState.target || target === this.effectState.target)) {
+					return true;
+					}
+					return accuracy;
+				},
+
+				onTryHit(target, source, move) {
+							if (target === source || move.category === 'Status' || move.type === '???' || move.id === 'struggle') return;
+							if (move.id === 'skydrop' && !source.volatiles['skydrop']) return;
+							this.debug('Wonder Guard immunity: ' + move.id);
+							if (target.runEffectiveness(move) <= 0) {
+								if (move.smartTarget) {
+									move.smartTarget = false;
+								} else {
+									this.add('-immune', target, '[from] ability: Wonder Guard');
+								}
+								return null;
+							}
+						},
+						onModifyType(move, pokemon) {
+									const noModifyType = [
+										'judgment', 'multiattack', 'naturalgift', 'revelationdance', 'technoblast', 'terrainpulse', 'weatherball',
+									];
+										move.type = 'Fairy';
+										move.typeChangerBoosted = this.effect;
+
+								},
+
+
+
+
+
+
+
+
+
+		isPermanent: true,
+		name: "radical",
+		rating: 3.5,
+		num: 0,
+	},
 	asoneglastrier: {
 		onPreStart(pokemon) {
 			this.add('-ability', pokemon, 'As One');

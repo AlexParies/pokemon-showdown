@@ -17502,6 +17502,17 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		color: "Pink",
 		eggGroups: ["Flying"],
 	},
+	raddaniel: {
+		num: 1,
+		name: "Rad Daniel",
+		types: ["Flying", "Fighting"],
+		baseStats: {hp: 1, atk: 360 , def: 1, spa: 1, spd: 1, spe: 360},
+		abilities: {0: "Wonderguard", 1: "radical", H: "radical"},
+		heightm: 1.6,
+		weightkg: 37,
+		color: "Pink",
+		eggGroups: ["Flying"],
+	},
 	cetoddle: {
 		num: 974,
 		name: "Cetoddle",
